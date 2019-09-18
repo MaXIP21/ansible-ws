@@ -1,0 +1,9 @@
+---
+- hosts: workstations
+  become: true
+
+  roles: 
+    - environment
+
+
+

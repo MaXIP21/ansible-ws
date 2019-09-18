@@ -1,0 +1,9 @@
+os_environment:
+  - key: http_proxy 
+    value : http://199.19.250.205:80 
+  - key: https_proxy
+    value : http://199.19.250.205:80
+  - key: ftp_proxy
+    value : http://199.19.250.205:80
+  - key: no_proxy
+    value : localhost,127.0.0.1,localaddress,.localdomain.com,*.conti.de,github.conti.de
