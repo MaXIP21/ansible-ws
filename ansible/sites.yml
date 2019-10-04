@@ -6,3 +6,11 @@
     - environment
     - packages
 
+- hosts: workstations
+  become: true
+  vars:
+    reboot: false
+  roles:
+    - reboot
+  tags: 
+    - reboot
