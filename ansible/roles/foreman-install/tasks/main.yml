@@ -2,6 +2,6 @@
   git:
     repo: git clone --recursive git://github.com/theforeman/foreman-installer.git -b develop
     version: master
-    dest: /home/r0ck/foreman-install
+    dest: /home/ansible/foreman-install
     accept_hostkey: yes
   become: no
