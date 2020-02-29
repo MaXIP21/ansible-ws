@@ -3,6 +3,5 @@
   become: true
 
   roles: 
-    - environment
     - packages
     - foreman-install
