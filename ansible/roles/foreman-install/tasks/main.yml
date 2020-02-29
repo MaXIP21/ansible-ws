@@ -1,0 +1,7 @@
+- name: Clone a foreman repository.
+  git:
+    repo: git clone --recursive git://github.com/theforeman/foreman-installer.git -b develop
+    version: master
+    dest: /home/r0ck
+    accept_hostkey: yes
+  become: no
