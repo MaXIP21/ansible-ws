@@ -5,6 +5,7 @@
   roles: 
     - environment
     - packages
+    - foreman
 
 - hosts: workstations
   become: true
