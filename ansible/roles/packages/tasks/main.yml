@@ -1,9 +1,6 @@
-- name: Install GIT
+- name: Install a list of packages
   apt:
-    name: git
-    state: present
-
-- name: Install necessary python3 packages
-  apt:
-    name: python3-pip
-    state: present
+    pkg:
+    - python3-pip
+    - git
+    - build-essential
