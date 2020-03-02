@@ -1,5 +1,4 @@
 - name: Install a list of packages
-  became: true
   apt:
     pkg:
     - python3-pip
