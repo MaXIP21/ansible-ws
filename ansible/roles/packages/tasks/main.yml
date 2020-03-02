@@ -6,4 +6,3 @@
     - git
     - build-essential
     update_cache: yes
-    sudo: yes
