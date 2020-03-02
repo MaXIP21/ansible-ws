@@ -1,8 +1,8 @@
 - name: Install a list of packages
+  sudo: yes
   apt:
     pkg:
     - python3-pip
     - git
     - build-essential
     update_cache: yes
-  sudo: yes
