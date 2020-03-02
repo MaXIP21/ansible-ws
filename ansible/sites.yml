@@ -1,8 +1,7 @@
 ---
 - hosts: workstations
   become: true
-  sudo: yes
   
   roles: 
     - packages
-    - foreman-install-apt
+    - foreman-install
