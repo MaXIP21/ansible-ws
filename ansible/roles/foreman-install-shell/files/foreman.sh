@@ -1,4 +1,4 @@
-/bin/bash
+#!/bin/bash
 _IP=`ip -4 addr | grep -oP '(?<=inet\s)\d+(\.\d+){3}'`
 hostnamectl set-hostname foreman.example.com
 echo "$_IP foreman.example.com" | sudo tee -a /etc/hosts
