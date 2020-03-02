@@ -1,10 +1,20 @@
+- name: Copy apt-key to /tmp
+  copy:
+    src: files/foreman.gpg
+    dest: /tmp/foreman.gpg
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Add apt key by id from a keyserver
+  apt_key:
+    id: 6F8600B9563278F6
+    file: /tmp/foreman.gpg
+    state: present
+
 - apt_repository:
     repo: deb http://deb.theforeman.org/ bionic 1.23
     state: present
-
-- name: register the GPG key
-  command: wget -q http://deb.theforeman.org/pubkey.gpg -O- | apt-key add -
-
 
 - name: Install a list of packages
   apt:
@@ -13,3 +23,15 @@
     - foreman-sqlite3 
     - foreman-libvirt
     update_cache: yes
+
+- name: Copy foreman database configuration
+  command: cp /usr/share/foreman/config/database.yml.example /etc/foreman/database.yml
+  become: yes
+
+- name: Apply DB configuration db:migrate
+  command: foreman-rake db:migrate
+  become: yes
+
+- name: Apply DB configuration db:seed
+  command: foreman-rake db:seed
+  become: yes
