@@ -4,4 +4,4 @@
 
   roles: 
     - packages
-    - foreman-install
+    - foreman-install-apt

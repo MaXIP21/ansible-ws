@@ -1,0 +1,15 @@
+- apt_repository:
+    repo: deb http://deb.theforeman.org/ bionic 1.23
+    state: present
+
+- name: register the GPG key
+  command: wget -q http://deb.theforeman.org/pubkey.gpg -O- | apt-key add -
+
+
+- name: Install a list of packages
+  apt:
+    pkg:
+    - foreman
+    - foreman-sqlite3 
+    - foreman-libvirt
+    update_cache: yes

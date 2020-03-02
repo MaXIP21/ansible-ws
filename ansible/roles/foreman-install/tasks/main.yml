@@ -1,7 +1,10 @@
 - name: Clone a foreman repository.
+  environment:
+    http_proxy: http://cias.geoaws.com:8080
+    https_proxy: http://cias.geoaws.com:8080
   git:
-    repo: git clone --recursive git://github.com/theforeman/foreman-installer.git -b develop
-    version: master
+    repo: git://github.com/theforeman/foreman-installer.git -b develop
     dest: /home/ansible/foreman-install
     accept_hostkey: yes
+    recursive: yes
   become: no
