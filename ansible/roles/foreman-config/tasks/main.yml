@@ -1,0 +1,24 @@
+- name: Create answers file directory
+  file:
+    path: /etc/foreman-installer/scenarios.d
+    mode: 0755
+    state: directory
+
+- name: Generate answers file
+  template:
+    src: foreman-answers.yaml
+    dest: /etc/foreman-installer/scenarios.d/foreman-answers.yaml
+    mode: 0600
+
+- name: Disable Apache default vhost to prevent binding to port 80
+  lineinfile:
+    path: /etc/foreman-installer/custom-hiera.yaml
+    regexp: '^apache::default_vhost:'
+    line: "apache::default_vhost: false"
+    state: present
+
+- name: Install Foreman
+  script: foreman_installer.py
+  args:
+    executable: python
+  register: foreman_installer_output

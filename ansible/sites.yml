@@ -5,3 +5,4 @@
   roles: 
     - packages
     - foreman-install-shell
+    - foreman-config
