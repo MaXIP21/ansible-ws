@@ -1,0 +1,11 @@
+- name: Copy foreman_install.sh to /tmp
+  copy:
+    src: files/foreman.sh
+    dest: /tmp/foreman.sh
+    owner: root
+    group: root
+    mode: 0755
+    
+- name: Install foreman
+  command: /tmp/foreman.sh
+  become: yes
