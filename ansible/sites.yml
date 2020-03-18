@@ -6,3 +6,8 @@
     - packages
     - foreman-install-shell
     - foreman-config
+
+- hosts: S3
+  become: true
+  roles:
+    - nvidia-driver
