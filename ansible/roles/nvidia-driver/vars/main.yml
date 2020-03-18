@@ -1,3 +1,8 @@
 cuda_repository_key_url: https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/7fa2af80.pub
 cuda_repository_url: https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64
 nvidia_machine_learning_repository_url: https://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1804/x86_64
+nvidia_docker2: 2.0.3+docker18.09.6-3
+nvidia_docker_runtime: 2.0.0+docker18.09.6-3
+nvidia_driver: nvidia-435
+cuda_driver: cuda-drivers
+cuda_driver_version: 410.129-1
