@@ -1,0 +1,93 @@
+- name: Install CUDA prerequisites
+  apt:
+    name:
+    - "linux-headers-{{ ansible_kernel }}"
+    - "linux-image-{{ ansible_kernel }}"
+    state: present
+
+- name: Pin kernel packages
+  dpkg_selections:
+    name:  "{{ item }}"  
+    selection: hold
+  loop:
+    - "linux-headers-{{ ansible_kernel }}"
+    - "linux-image-{{ ansible_kernel }}"
+
+- name: Configure CUDA repository key
+  apt_key:
+    url: "{{ cuda_repository_key_url }}"
+    state: present
+
+- name: Configure CUDA repository
+  apt_repository:
+    repo: "deb {{ cuda_repository_url }} /"
+    filename: cuda-repo-ubuntu1604
+
+- name: Configure Nvidia machine learning repository (CUDNN, NCCL)
+  apt_repository:
+    repo: "deb {{ nvidia_machine_learning_repository_url }} /"
+    filename: nvidia-machine-learning-repo-ubuntu1604
+
+- name: "Install {{ nvidia_driver }} drivers"
+  apt:
+    name:
+    - "{{ nvidia_driver }}"
+    - "{{ cuda_driver }}={{ cuda_driver_version }}"
+    update_cache: yes
+    allow_unauthenticated: yes
+    state: present
+
+- name: Install and upgrade CUDA
+  apt:
+    name:
+    - cuda-9-0
+    - cuda-cublas-9-0
+    - cuda-cufft-9-0
+    - cuda-curand-9-0
+    - cuda-cusolver-9-0
+    - cuda-cusparse-9-0
+    - cuda-command-line-tools-9-0
+    update_cache: yes
+    allow_unauthenticated: yes
+    state: latest
+
+- name: Pin cuda packages
+  dpkg_selections:
+    name:  "{{ item }}"  
+    selection: hold
+  loop:
+    - "{{ nvidia_driver }}"
+    - "{{ cuda_driver }}"
+    - cuda-9-0
+    - cuda-cublas-9-0
+    - cuda-cufft-9-0
+    - cuda-curand-9-0
+    - cuda-cusolver-9-0
+    - cuda-cusparse-9-0
+    - cuda-command-line-tools-9-0
+
+- name: Install CUDNN, NCCL
+  apt:
+    name:
+    - libcudnn7=7.0.5.15-1+cuda9.0
+    - libcudnn7-dev=7.0.5.15-1+cuda9.0
+    - libnccl2=2.2.13-1+cuda9.0
+    - libnccl-dev=2.2.13-1+cuda9.0
+    allow_unauthenticated: yes
+
+
+- name: Pin cudnn and nccl packages
+  dpkg_selections:
+    name:  "{{ item }}"  
+    selection: hold
+  loop:
+    - libcudnn7
+    - libcudnn7-dev
+    - libnccl2
+    - libnccl-dev
+
+- name: Link CUDA in /usr/local
+  file:
+    src: /usr/local/cuda-9.0
+    dest: /usr/local/cuda
+    state: link
